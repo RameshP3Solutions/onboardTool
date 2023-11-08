@@ -1,12 +1,15 @@
-getPagination('#admin_userslist');
+getPagination('#Report_Details');
 
 function getPagination(table) {
   var lastPage = 1;
-  console.log("AdminPagination called")
+
+ 
 
   $('#maxRows')
     .on('change', function(evt) {
-      //$('.paginationprev').html('');						// reset pagination
+
+
+ 
 
      lastPage = 1;
       $('.pagination')
@@ -16,11 +19,15 @@ function getPagination(table) {
       var trnum = 0; // reset tr counter
       var maxRows = parseInt($(this).val()); // get Max Rows from select option
 
-      if (maxRows == 5000) {
+ 
+
+      if (maxRows == 1000) {
         $('.pagination').hide();
       } else {
         $('.pagination').show();
       }
+
+ 
 
       var totalRows = $(table + ' tbody tr').length; // numbers of rows
       $(table + ' tr:gt(0)').each(function() {
@@ -28,6 +35,8 @@ function getPagination(table) {
         trnum++; // Start Counter
         if (trnum > maxRows) {
           // if tr number gt maxRows
+
+ 
 
           $(this).hide(); // fade it out
         }
@@ -46,10 +55,10 @@ function getPagination(table) {
               '<li data-page="' +
                 i +
                 '">\
-								  <span>' +
+<span>' +
                 i++ +
                 '<span class="sr-only">(current)</span></span>\
-								</li>'
+</li>'
             )
             .show();
         } // end for i
@@ -61,7 +70,11 @@ function getPagination(table) {
         evt.preventDefault();
         var pageNum = $(this).attr('data-page'); // get it's number
 
+ 
+
         var maxRows = parseInt($('#maxRows').val()); // get Max Rows from select option
+
+ 
 
         if (pageNum == 'prev') {
           if (lastPage == 1) {
@@ -75,6 +88,8 @@ function getPagination(table) {
           }
           pageNum = ++lastPage;
         }
+
+ 
 
         lastPage = pageNum;
         var trIndex = 0; // reset tr counter
@@ -101,13 +116,18 @@ function getPagination(table) {
     .val(5)
     .change();
 
-  // end of on select change
+ 
 
-  // END OF PAGINATION
+ 
+
 }
+
+ 
 
 function limitPagging(){
 	// alert($('.pagination li').length)
+
+ 
 
 	if($('.pagination li').length > 7 ){
 			if( $('.pagination li.active').attr('data-page') <= 3 ){
@@ -120,21 +140,30 @@ function limitPagging(){
 			for( let i = ( parseInt($('.pagination li.active').attr('data-page'))  -2 )  ; i <= ( parseInt($('.pagination li.active').attr('data-page'))  + 2 ) ; i++ ){
 				$('.pagination [data-page="'+i+'"]').show();
 
+ 
+
 			}
+
+ 
 
 		}
 	}
 }
 
+ 
+
 $(function() {
   // Just to append id number for each row
   /*$('table tr:eq(0)').prepend('<th> ID </th>');
 
+ 
+
   var id = 0;
+
+ 
 
   $('table tr:gt(0)').each(function() {
     id++;
     $(this).prepend('<td>' + id + '</td>');
   });*/
 });
-

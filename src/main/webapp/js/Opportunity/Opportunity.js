@@ -47,6 +47,7 @@ $(document).ready(function(){
                         "<label class='control-label' for='opportunity'>"+LabelName+"<span "+manadatory+"></span></label>"+delete_icon+"<span class='glyphicon glyphicon-pencil editpopup hidepencil' style='float:right;display:none;'></span>\n" +
                         "<input type='text' class='form-control' size='35' id='"+ColumnName+"' placeholder='' name='"+ColumnName+"' value='"+Value+"'/>\n" +
                         "</div>";
+                    console.log("inputext",inputtext);
                     $('#inputFields').append(inputtext);
                     template_check="checked";
                 		}

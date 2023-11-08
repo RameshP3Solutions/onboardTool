@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>New Opportunity</title>
+<title>Finance Input</title>
 <script src="js/jquery/jquery-2.2.4.min.js"></script>
 <!-- ========== MODERNIZR ========== -->
 <script src="js/modernizr/modernizr.min.js"></script>
@@ -80,36 +80,53 @@ pageEncoding="ISO-8859-1"%>
 <body>
 
 	<%@include file="Nav-Bar.jspf"%>
-	<nav class="nav nav-height-50" id="bg-color">
+	<nav class="nav nav-down-height" id="bg-color">
 		<div class="container-fluid" id="container-fluid-margin">
-			<div class="row" id="d3s-mt-10">
+			<div class="row" id="d3s-mt-20">
 				<div class="col-lg-12 col-md-12">
-					<h5 id="title">Create Opportunity</h5>
+					<h5 class="title" style="color: #fff">Modules</h5>
+				</div>
+			</div>
+			<!-- <p class="sub-title">Create and manage your Opportunities here</p>-->
+			<%--  <p class="sub-title" style="color:#fff"> <a  href="OpportunityList.jsp" id="sitetitle1" style="color:#fff"><span class="glyphicon glyphicon-home"></span> Home</a> >><%=waveName%></p> --%>
+			<div class="row">
+				<div class="col-lg-12 col-md-12">
+				
+						<div class="sub-title" style="color: #fff">
+<a href="DashBoard.jsp" id="sitetitle1" style="color: #fff"><span
+							class="glyphicon glyphicon-home"></span> Home</a> >> <a
+							href="Finance.jsp" id="sitetitle1" style="color: #fff">
+							Finance</a> >> Finance Details
+</div>
 				</div>
 			</div>
 		</div>
+	
 	</nav>
 
 	<div class="card-container-1 mt-5">
 		<div class="card">
-			<div class="card-header" id="cd-header">New Opportunity</div>
+			<div class="card-header" id="cd-header">Finance Details</div>
 			<div class="card-body">
 				<form class="form-signin" name="OpportunityForm"
 					enctype='application/json'>
-					<div id="inputFields">
+					<div id="FinanceInput">
 						<div class='form-group'>
 							<input type='hidden' class='form-control' size='35'
 								id="Record_No" placeholder='' name="RecordNo" value="" /> <input
-								type='hidden' class='form-control' size='35' id="Json_sample_id"
+								type='hidden' class='form-control' size='40' id="Json_sample_id"
 								placeholder='' name="Json_Sample" value="" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-4">
 							<button type="button" class="btn btn-secondary"
-								onclick="location.href='OpportunityList.jsp';">Back</button>
+								onclick="location.href='DashBoard.jsp';">Back</button>
 						</div>
+
 						<div class="col-8" align="end">
+					
+
 							<button type="button" class="btn btn-secondary"
 								data-bs-toggle="modal" data-bs-target="#exampleModal">Template</button>
 							<div class="dropdown">
@@ -131,7 +148,7 @@ pageEncoding="ISO-8859-1"%>
 
 								</ul>
 							</div>
-							<button type="button" class="btn btn-primary" id="create">Create</button>
+							<button type="button" class="btn btn-primary" id="Submit">Submit</button>
 							<button type="button" class="btn btn-primary " id="editpopup_btn"
 								data-bs-toggle="modal" data-bs-target="#EditPopUp"
 								style="display: none;">Edit PopUp</button>
@@ -140,11 +157,11 @@ pageEncoding="ISO-8859-1"%>
 								data-bs-target="#DeletePopUp" style="display: none;">Delete
 								PopUp</button>
 							<button type="button" class="btn btn-primary pull-right"
-								id="OpportunityListbtn"
-								onclick="window.location.href='OpportunityList.jsp';"
+								id="HomePage" onclick="window.location.href='DashBoard.jsp';"
 								style="display: none;"></button>
 						</div>
 					</div>
+					
 				</form>
 				<!-------addModal---------->
 
@@ -320,54 +337,103 @@ pageEncoding="ISO-8859-1"%>
 						</div>
 					</div>
 				</div>
-				<!--------templateModal---------->
-
-				<div class="modal" id="exampleModal" tabindex="-1"
+				<!--------Screenshot Styles---------->
+				<div class="modal" id="EditPopUp1" tabindex="-1"
 					aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div class="modal-dialog modal-lg">
+					<div class="modal-dialog">
 						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">Opportunity
-									Template</h5>
+							<div class="modal-header" style="background-color: #1565c0;">
+								<h5 class="modal-title" id="exampleModalLabel"
+									style="color: white;">Finance Input ScreenShots</h5>
 								<button type="button" class="btn-close" data-bs-dismiss="modal"
 									aria-label="Close"></button>
 							</div>
-							<div class="modal-body">
-								<form name="myForm">
-									<div class="form-group" id="TemplateFields"></div>
-									<div class="col-md-6">
-										<label class="control-label" for="opportunity">Mandatory:</label>
-										<select id="templmandatory" class="form-select"
-											name="mandatory" required>
-											<option value="Yes">Yes</option>
-											<option value="No">No</option>
-										</select>
-									</div>
-								</form>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary"
-									data-bs-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary"
-									onclick="validateForm()" data-bs-dismiss="modal">Add
-									Template</button>
+							<div class="modal-body" data-bs-target="">
+								<table class="table table-bordered table-striped" id="datatable">
+
+									<thead>
+
+										<tr>
+											<th style="text-align: center;">File Name</th>
+											<th style="text-align: center;">Action</th>
+										</tr>
+									</thead>
+
+									<tbody id="Legacy_Scr_List">
+
+									</tbody>
+								</table>
+								<div class="modal-footer">
+
+									<button type="button" class="btn btn-secondary"
+										data-bs-dismiss="modal">Close</button>
+
+								</div>
 							</div>
 						</div>
 					</div>
+					<form action="Intake_scr_Download" method="post">
+						<input type="hidden" id="File_Name" name="File_Name"> <input
+							type="submit" id="scr_submit" style="display: none;">
+					</form>
+					<input type="submit" id="deletegrid_update" style="display: none;">
+
 				</div>
 			</div>
 		</div>
 	</div>
+
+
+	<!--------templateModal---------->
+
+	<div class="modal" id="exampleModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Finance Input
+						Template</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form name="myForm">
+						<div class="form-group" id="TemplateFields"></div>
+						<div class="col-md-6">
+							<label class="control-label" for="opportunity">Mandatory:</label>
+							<select id="templmandatory" class="form-select" name="mandatory"
+								required>
+								<option value="Yes">Yes</option>
+								<option value="No">No</option>
+							</select>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary"
+						onclick="validateForm()" data-bs-dismiss="modal">Add
+						Template</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+	</div>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 	<script src="js/toastr/toastr.min.js"></script>
-	<script src="js/Opportunity/AddFeatureFunctionality.js"></script>
-	<script src="js/Opportunity/AddFeatureAjaxCall.js"></script>
-	<script src="js/Opportunity/Opportunity.js"></script>
-	<script src="js/Opportunity/EditDeleteToggle.js"></script>
-	<script src="js/Opportunity/EditFunctionality.js"></script>
+
 	<script src="js/notification/notification.js"></script>
-	<script src="js/Opportunity/NewOpportunityCreate.js"></script>
+	<script src="js/FinanceModule/FinanceDetailsEntry/FinanceInput.js"></script>
+	<script src="js/FinanceModule/FinanceDetailsEntry/FinanceInputEntry.js"></script>
+	<script src="js/FinanceModule/FinanceDetailsEntry/FinanceLabelEdit.js"></script>
+	<script src="js/FinanceModule/FinanceDetailsEntry/LabelModify.js"></script>
+<script src="js/FinanceModule/FinanceDetailsEntry/FinanceScreenShotRetrieve.js"></script>
+
+
 	<script src="js/jquery/jquery-2.2.4.min.js"></script>
 	<!-- ========== Toastr ========== -->
 	<script

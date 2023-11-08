@@ -1,13 +1,9 @@
-getPagination('#admin_userslist');
-
-function getPagination(table) {
+getPaginationcom('#dyamicHeader');
+function getPaginationcom(table) {
+	console.log("pagination.js");
   var lastPage = 1;
-  console.log("AdminPagination called")
 
-  $('#maxRows')
-    .on('change', function(evt) {
-      //$('.paginationprev').html('');						// reset pagination
-
+$('#maxRows').on('change', function(evt) {
      lastPage = 1;
       $('.pagination')
         .find('li')
@@ -137,4 +133,3 @@ $(function() {
     $(this).prepend('<td>' + id + '</td>');
   });*/
 });
-

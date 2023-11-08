@@ -1,8 +1,17 @@
-getPagination('#admin_userslist');
+getPaginationcom('#dynamicHeader');
+					//getPagination('.table-class');
+					//getPagination('table');
 
-function getPagination(table) {
+		  /*					PAGINATION 
+		  - on change max rows select options fade out all rows gt option value mx = 5
+		  - append pagination list as per numbers of rows / max rows option (20row/5= 4pages )
+		  - each pagination li on click -> fade out all tr gt max rows * li num and (5*pagenum 2 = 10 rows)
+		  - fade out all tr lt max rows * li num - max rows ((5*pagenum 2 = 10) - 5)
+		  - fade in all tr between (maxRows*PageNum) and (maxRows*pageNum)- MaxRows 
+		  */
+function getPaginationcom(table) {
+	console.log("pagination.js");
   var lastPage = 1;
-  console.log("AdminPagination called")
 
   $('#maxRows')
     .on('change', function(evt) {
@@ -137,4 +146,3 @@ $(function() {
     $(this).prepend('<td>' + id + '</td>');
   });*/
 });
-
