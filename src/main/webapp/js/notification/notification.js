@@ -1,4 +1,6 @@
 function notification(type,message,title){
+	console.log("Notfication.js callued");
+	console.log(type);
 	 $(function () {
 		 
 		 toastr.options = {

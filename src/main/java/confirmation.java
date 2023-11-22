@@ -62,7 +62,7 @@ public class confirmation extends HttpServlet {
 
 		try {
 
-		Message message = new MimeMessage(session);
+		Message message = new MimeMessage(session);    
 		message.setFrom(new InternetAddress(Encode.forJava("decom3sixtytool@gmail.com")));
 		
 		message.setRecipients(Message.RecipientType.TO,

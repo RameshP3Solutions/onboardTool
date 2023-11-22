@@ -40,38 +40,43 @@ public class Compliance extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
         HttpSession details = request.getSession();
-        System.out.println("Connected in intake 2 Servlet");
         String ReportName=request.getParameter("category");
-        String Paginationnext=request.getParameter("direction");
-        System.out.println("Paginationnext : "+Paginationnext);
         String SearchBar = request.getParameter("Search");
         String SearchRequester = request.getParameter("SearchRequest");
         System.out.println("SearchRequest : "+SearchRequester);
         System.out.println("Search :: "+SearchBar);
         System.out.println("Report Name :: "+ReportName);
+        String page =request.getParameter("page");
+        System.out.println("Page : "+page);
+        String maxRows = request.getParameter("maxRows");
+        System.out.println("maxRows : "+maxRows);
         JsonArray jsonArray = null;
         IntakeReportService ReportDetails =  new IntakeReportService();
-    if((SearchBar == "") && (ReportName != null)) {
+    if((SearchBar != "") && (ReportName != null) && (SearchRequester !="" )) {
     	System.out.println("Checkinggg-------------------------------===========");
     try {
-		jsonArray = ReportDetails.ReportDetails(ReportName);
+    	jsonArray = ReportDetails.ReportDetailsfilter(ReportName,SearchBar,SearchRequester);
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
     }
-    else {
-    	System.out.println("Checkingggn in else-------------------------------===========");
+    else if((ReportName != null) && (page!=null) && (maxRows!=null)) {
+    	System.out.println("Checkingggn in else if -------------------------------===========");
     	try {
-    		jsonArray = ReportDetails.ReportDetailsfilter(ReportName,SearchBar,SearchRequester);
+    		jsonArray = ReportDetails.ReportDetails(ReportName,page, maxRows);
     	} catch (SQLException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
     	}
     }
+    else {
+    	System.out.println("Checkingggn in else-------------------------------===========");
+    }
+    
+
     
         ReportDetails=null;
-        //calling finalize method and garabage collector
         System.gc();
         String json = new Gson().toJson(jsonArray);
         response.setContentType("application/json");

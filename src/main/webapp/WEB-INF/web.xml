@@ -22,6 +22,27 @@
   	<servlet-name>IntakeReport</servlet-name>
   	<servlet-class>compliance.servlet.IntakeReport</servlet-class>
   </servlet>
+  <servlet>
+  	<description>
+  	</description>
+  	<display-name>GovernanceReportGeneration</display-name>
+  	<servlet-name>GovernanceReportGeneration</servlet-name>
+  	<servlet-class>governance.ReportGeneration.Servlet.GovernanceReportGeneration</servlet-class>
+  </servlet>
+  <servlet>
+  	<description>
+  	</description>
+  	<display-name>Reportgenerationservlet</display-name>
+  	<servlet-name>Reportgenerationservlet</servlet-name>
+  	<servlet-class>governance.ReportGeneration.Servlet.Reportgenerationservlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<description>
+  	</description>
+  	<display-name>ReportgenerationSearchservletGovernance</display-name>
+  	<servlet-name>ReportgenerationSearchservletGovernance</servlet-name>
+  	<servlet-class>governance.ReportGeneration.Servlet.ReportgenerationSearchservletGovernance</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>intakereport1</servlet-name>
   	<url-pattern>/intakereport1</url-pattern>
@@ -33,6 +54,18 @@
   <servlet-mapping>
   	<servlet-name>IntakeReport</servlet-name>
   	<url-pattern>/IntakeReport</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>GovernanceReportGeneration</servlet-name>
+  	<url-pattern>/GovernanceReportGeneration</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>Reportgenerationservlet</servlet-name>
+  	<url-pattern>/Reportgenerationservlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ReportgenerationSearchservletGovernance</servlet-name>
+  	<url-pattern>/ReportgenerationSearchservletGovernance</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

@@ -1183,6 +1183,12 @@ public class dashboardService {
         JsonObject jsonObject = new JsonObject();
         try {
             int triageCount = 0, assesmentCount = 0, completedCount = 0, newOpp = 0, pendApproval = 0;
+            System.out.println("newOpp : "+newOpp);
+            System.out.println("pendApproval : "+pendApproval);
+            System.out.println("completedCount : "+completedCount);
+            System.out.println("assesmentCount : "+assesmentCount);
+            System.out.println("triageCount : " +triageCount);
+            
             for (String app : apps) {
                  String selectApp = "select * from opportunity_info where column_name='appName' and value = ?";
                 PreparedStatement st = con.prepareStatement(selectApp);
@@ -1295,7 +1301,14 @@ public class dashboardService {
                 rs.close();
                 st.close();
             }
+            System.out.println();
               double totalCount = newOpp + triageCount + assesmentCount + pendApproval + completedCount;
+              System.out.println("totalCount F :" +totalCount);
+              System.out.println("newOpp F : "+newOpp);
+              System.out.println("triageCount F : "+triageCount);
+              System.out.println("assesmentCount F : "+assesmentCount);
+              System.out.println("pendApproval F : "+pendApproval);
+              System.out.println("completedCount F : "+completedCount);
             DecimalFormat f = new DecimalFormat("##.##");
              double newOpportunity = Double.parseDouble(f.format((newOpp * 100) / totalCount));
             double triage = Double.parseDouble(f.format((triageCount * 100) / totalCount));

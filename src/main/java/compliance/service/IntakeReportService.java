@@ -116,7 +116,8 @@ public JsonArray ReportDetailsfilter(String ReportName,String SearchName,String 
             jsonObj.addProperty("EDR_Analyst",rs.getString(19));
             jsonObj.addProperty("Big_Rock",rs.getString(20));
             jsonObj.addProperty("Data_Read_only_State",rs.getString(21));
-
+            jsonObj.addProperty("Application_Status",rs.getString(22));
+            jsonObj.addProperty("Phase_Status",rs.getString(23));
             jsonArray.add(jsonObj);
         }
         st.close(); 
@@ -150,7 +151,8 @@ public JsonArray ReportDetailsfilter(String ReportName,String SearchName,String 
                 jsonObj.addProperty("EDR_Analyst",rs.getString(19));
                 jsonObj.addProperty("Big_Rock",rs.getString(20));
                 jsonObj.addProperty("Data_Read_only_State",rs.getString(21));
-
+                jsonObj.addProperty("Application_Status",rs.getString(22));
+                jsonObj.addProperty("Phase_Status",rs.getString(23));
                 jsonArray.add(jsonObj);
             }
             st.close(); 
@@ -184,6 +186,8 @@ public JsonArray ReportDetailsfilter(String ReportName,String SearchName,String 
                 jsonObj.addProperty("EDR_Analyst",rs.getString(19));
                 jsonObj.addProperty("Big_Rock",rs.getString(20));
                 jsonObj.addProperty("Data_Read_only_State",rs.getString(21));
+                jsonObj.addProperty("Application_Status",rs.getString(22));
+                jsonObj.addProperty("Phase_Status",rs.getString(23));
                 jsonArray.add(jsonObj);
            }
             st.close(); 
@@ -237,9 +241,6 @@ public JsonArray ReportDetailsfilter(String ReportName,String SearchName,String 
     }else {
     	System.out.println("the requested report is not found");
     }
-
- 
-
     }
 catch(Exception e)
     {
@@ -249,16 +250,18 @@ catch(Exception e)
     return jsonArray;
 }
 
-public JsonArray ReportDetails(String ReportName) throws SQLException {
+public JsonArray ReportDetails(String ReportName,String Page, String MaxRows) throws SQLException {
 	PreparedStatement st=null;
 	ResultSet rs=null;
     JsonArray jsonArray = new JsonArray();
     String IntakeReportName = ReportName;
-try {
-    //String random_id = generateRandomApprovalId();
+    
+    try {
     DBconnection dBconnection = new DBconnection();
     Connection connection = (Connection) dBconnection.getConnection();
     System.out.println("Connected... in intake2Service without");
+   
+    
     if (IntakeReportName.equalsIgnoreCase("Intake_Report_2"))
     {
     System.out.println("I am in intake report2");
@@ -294,7 +297,7 @@ try {
     else if (IntakeReportName.equalsIgnoreCase("Intake_Report_1"))
     {
     System.out.println("I am in intake report1 without");
-    String selectQuery = "select *  from decom3sixtytool.intakeReport1";
+    String selectQuery = "SELECT * FROM decom3sixtytool.intakereport1 ";
     st = connection.prepareStatement(selectQuery);
     rs = st.executeQuery();
     while(rs.next())
@@ -325,8 +328,9 @@ try {
 
         jsonArray.add(jsonObj);
    }
-    st.close(); 
     rs.close();
+    st.close();
+    connection.close();
     }
     else if (IntakeReportName.equalsIgnoreCase("Intake_Report_3")) {
         System.out.println("I am in intake report3 without");
@@ -353,9 +357,6 @@ try {
     else {
     	System.out.println("the requested report is not found");
     }
-
- 
-
     }
 catch(Exception e)
     {
@@ -364,4 +365,77 @@ catch(Exception e)
     System.out.println("JSON Next from service"+jsonArray);
     return jsonArray;
 	}
+public JsonObject retrieveDataWithCount(String Page, String MaxRows) {
+    PreparedStatement st = null;
+    ResultSet rs = null;
+    JsonArray jsonArray = new JsonArray();
+    int totalCount = 0;
+
+    try {
+        DBconnection dBconnection = new DBconnection();
+        Connection connection = (Connection) dBconnection.getConnection();
+        System.out.println("Connected...");
+        
+        
+        int page = Integer.parseInt(Page);
+        int maxRows = Integer.parseInt(MaxRows);
+        // Calculate the starting row for pagi
+        int start = (page - 1) * maxRows;
+       
+
+        // Query to get the data for the specified page and max rows
+        String selectQuery = "SELECT * FROM decom3sixtytool.intakereport1 LIMIT "+start+","+maxRows+";";
+        st = connection.prepareStatement(selectQuery);
+
+        rs = st.executeQuery();
+        while (rs.next()) {
+            JsonObject jsonObj = new JsonObject();
+            jsonObj.addProperty("Application_Id",rs.getString(1));
+            jsonObj.addProperty("Application_Name",rs.getString(2));
+            jsonObj.addProperty("Creation_Date",rs.getString(3));
+            jsonObj.addProperty("Status",rs.getString(4));
+            jsonObj.addProperty("Request_Type",rs.getString(5));
+            jsonObj.addProperty("Requester",rs.getString(6));
+            jsonObj.addProperty("Application_Owner",rs.getString(7));
+            jsonObj.addProperty("Business_Segment",rs.getString(8));
+            jsonObj.addProperty("Business_Unit",rs.getString(9));
+            jsonObj.addProperty("Preliminary_CBA",rs.getString(10));
+            jsonObj.addProperty("Funding_Available",rs.getString(11));
+            jsonObj.addProperty("Program_Funder",rs.getString(12));
+            jsonObj.addProperty("Project_Portfolio_Information",rs.getString(13));
+            jsonObj.addProperty("Project_Decomission_Date",rs.getString(14));
+            jsonObj.addProperty("Infrastructure_Impact",rs.getString(15));
+            jsonObj.addProperty("Number_of_Infrastructure_Components",rs.getString(16));
+            jsonObj.addProperty("Archival_Solution",rs.getString(17));
+            jsonObj.addProperty("Status_Notes",rs.getString(18));
+            jsonObj.addProperty("EDR_Analyst",rs.getString(19));
+            jsonObj.addProperty("Big_Rock",rs.getString(20));
+            jsonObj.addProperty("Data_Read_only_State",rs.getString(21));
+            jsonObj.addProperty("Application_Status",rs.getString(22));
+            jsonObj.addProperty("Phase_Status",rs.getString(23));
+            jsonArray.add(jsonObj);
+        }
+
+        // Query to get the total count of records
+        String countQuery = "SELECT COUNT(*) AS total FROM decom3sixtytool.intakereport1";
+        st = connection.prepareStatement(countQuery);
+        rs = st.executeQuery();
+        if (rs.next()) {
+            totalCount = rs.getInt("total");
+        }
+
+        st.close();
+        rs.close();
+    } catch (Exception e) {
+        System.out.println("Exception Occurs");
+    }
+
+    // Create a JSON object to hold both data and total count
+    JsonObject result = new JsonObject();
+    result.addProperty("total", totalCount);
+    result.add("data", jsonArray);
+
+    System.out.println("JSON of pagination Services : " + result);
+    return result;
+}
 }

@@ -87,6 +87,7 @@ $('#add_usersubmit').click(function(){
        
         $(document).on('click', '.editpopup', function () {
     $('#editpopup_btn').click();
+    console.log("Edit Popup Function called");
      var seqnum=$(this).index('.editpopup');
     var currentRow=$(this).closest("tr");
     var uname_modify=currentRow.find("td:eq(0)").text();

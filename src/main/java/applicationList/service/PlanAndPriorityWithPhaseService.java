@@ -101,7 +101,7 @@ public class PlanAndPriorityWithPhaseService {
 							}
 						}
 					}
-					System.out.println("All apps: " + allappsList);
+					System.out.println("All apps 1 1 1 1: " + allappsList);
 					allapp = new String[allappsList.size()];
 					allapp = allappsList.toArray(allapp);
 					rs.close();
@@ -327,7 +327,7 @@ public class PlanAndPriorityWithPhaseService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("Phase wave bina data " + jsonArray);
+		System.out.println("Phase wave bina data :  " + jsonArray);
 		return jsonArray;
 	}
 
